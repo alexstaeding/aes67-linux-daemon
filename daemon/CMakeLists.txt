@@ -32,6 +32,15 @@ set(AVAHI_LIBRARIES ${AVAHI_LIBRARY-COMMON} ${AVAHI_LIBRARY-CLIENT})
 set(AVAHI_INCLUDE_DIRS ${AVAHI_INCLUDE_DIR})
 
 find_package(Boost COMPONENTS system thread log program_options REQUIRED)
+message(RAVENNA_ALSA_LKM_DIR="${RAVENNA_ALSA_LKM_DIR}")
+
+file(GLOB files_in_dir "${RAVENNA_ALSA_LKM_DIR}/driver/*")
+
+message(STATUS "Files in ${RAVENNA_ALSA_LKM_DIR}/driver:")
+foreach(file ${files_in_dir})
+  message(STATUS "  ${file}")
+endforeach()
+
 include_directories(aes67-daemon ${RAVENNA_ALSA_LKM_DIR}/common ${RAVENNA_ALSA_LKM_DIR}/driver ${CPP_HTTPLIB_DIR} ${Boost_INCLUDE_DIR})
 add_definitions( -DBOOST_LOG_DYN_LINK -DBOOST_LOG_USE_NATIVE_SYSLOG )
 add_compile_options( -Wall )
